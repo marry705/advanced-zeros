@@ -3,17 +3,17 @@
 * @ return how many zeros in the end of number, 
 * which is factorial of number in base base system
 */
-module.exports = function getZerosCount(number = 1, base = 2) {
+/*module.exports = function getZerosCount(number = 1, base = 2) {
     let j = 0;
     let i = 2;
     let arr = [];
     let bas = base;
     let num = number;
     while (i < bas){
-        if (bas % i == 0){
+        if (bas % i === 0){
             arr[j] = i;
             j++;
-            bas = bas / i;
+            bas = bas/i;
         }
         else i++;
     }
@@ -34,4 +34,49 @@ module.exports = function getZerosCount(number = 1, base = 2) {
         count+=num;
     }
     return Math.floor(count/rep);
+}*/
+module.exports = function getZerosCount(number = 1, base = 2) {
+    let k = 0;
+    let j = 0;
+    let i = 2;
+    let count = 0;
+    let numbersB = [];
+    let exp = [];
+    let bas = base;
+    
+    while(i <= bas){
+      if (bas % i === 0) {
+            numbersB[j] = i; 
+            j++;
+      }
+      while (bas % i === 0) {
+         bas = bas/i;              
+         count++;
+      }
+    i++; 
+      if (count > 0) {
+          exp[k] = count;
+          k++;
+      }
+    count = 0; 
+    }
+
+    const len = numbersB.length;
+    count = 0;
+    j = 0;
+    let zer = [];
+    let num = number;
+    for (i = 0; i < len; i++){
+        k = numbersB[i];
+        while (num > 1){
+             num = Math.floor(num/k);
+             count = count + num;
+        }
+        zer[j] = Math.floor(count/exp[j]);
+        count = 0;
+        j++;
+        num = number;
+    }
+    zer.sort((left, right) => left - right);
+    return zer[0];
 }
