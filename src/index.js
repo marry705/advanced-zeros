@@ -15,19 +15,19 @@ module.exports = function getZerosCount(number = 1, base = 2) {
     
     while(i <= bas){
       if (bas % i === 0) {
-            numbersB[j] = i; 
-            j++;
+        numbersB[j] = i; 
+        j++;
       }
       while (bas % i === 0) {
-         bas = bas/i;              
-         count++;
+        bas = bas/i;              
+        count++;
       }
-    i++; 
+      i++; 
       if (count > 0) {
-          exp[k] = count;
-          k++;
+        exp[k] = count;
+        k++;
       }
-    count = 0; 
+      count = 0; 
     }
 
     const len = numbersB.length;
@@ -35,17 +35,17 @@ module.exports = function getZerosCount(number = 1, base = 2) {
     j = 0;
     const zer = [];
     let num = number;
-    for (i = 0; i < len; i++){
-        k = numbersB[i];
-        while (num > 1){
-             num = Math.floor(num/k);
-             count = count + num;
-        }
-        zer[j] = Math.floor(count/exp[j]);
-        count = 0;
-        j++;
-        num = number;
-    }
+    numbersB.forEach(element => {
+      k = element;
+      while (num > 1){
+        num = Math.floor(num/k);
+        count = count + num;
+      }
+      zer[j] = Math.floor(count/exp[j]);
+      count = 0;
+      j++;
+      num = number;
+    });
     zer.sort((left, right) => left - right);
     return zer[0];
 }
